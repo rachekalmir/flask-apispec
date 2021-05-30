@@ -36,16 +36,27 @@ class FlaskApiSpec:
     :param Flask app: App associated with API documentation
     :param APISpec spec: apispec specification associated with API documentation
     :param bool document_options: Whether or not to include
+    :param String static_folder: Static files folder location
+    :param String template_folder: Template files folder location
+    :param String static_url_path: URL to serve static files
         OPTIONS requests in the specification
     """
 
-    def __init__(self, app=None, document_options=True):
+    def __init__(self,
+                 app=None,
+                 document_options=True,
+                 static_folder='./static',
+                 template_folder='./templates',
+                 static_url_path='/flask-apispec/static'):
         self._deferred = []
         self.app = app
         self.view_converter = None
         self.resource_converter = None
         self.spec = None
         self.document_options = document_options
+        self.static_folder = static_folder
+        self.template_folder = template_folder
+        self.static_url_path = static_url_path
 
         if app:
             self.init_app(app)
@@ -75,9 +86,9 @@ class FlaskApiSpec:
         blueprint = flask.Blueprint(
             'flask-apispec',
             __name__,
-            static_folder='./static',
-            template_folder='./templates',
-            static_url_path='/flask-apispec/static',
+            static_folder=self.static_folder,
+            template_folder=self.template_folder,
+            static_url_path=self.static_url_path,
         )
 
         json_url = self.app.config.get('APISPEC_SWAGGER_URL', '/swagger/')
