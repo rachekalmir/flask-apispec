@@ -39,6 +39,7 @@ class FlaskApiSpec:
     :param String static_folder: Static files folder location
     :param String template_folder: Template files folder location
     :param String static_url_path: URL to serve static files
+    :param String proxy_url_path: URL for proxy path when flask-apispec is behind a proxy, should not end with a trailing slash
         OPTIONS requests in the specification
     """
 
@@ -47,7 +48,8 @@ class FlaskApiSpec:
                  document_options=True,
                  static_folder='./static',
                  template_folder='./templates',
-                 static_url_path='/flask-apispec/static'):
+                 static_url_path='/flask-apispec/static',
+                 proxy_url_path=''):
         self._deferred = []
         self.app = app
         self.view_converter = None
@@ -57,6 +59,7 @@ class FlaskApiSpec:
         self.static_folder = static_folder
         self.template_folder = template_folder
         self.static_url_path = static_url_path
+        self.proxy_url_path = proxy_url_path
 
         if app:
             self.init_app(app)
