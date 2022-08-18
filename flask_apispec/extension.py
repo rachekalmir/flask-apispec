@@ -4,7 +4,6 @@ import types
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 
-from flask_apispec import ResourceMeta
 from flask_apispec.apidoc import ViewConverter, ResourceConverter
 
 
@@ -117,6 +116,10 @@ class FlaskApiSpec:
             except ValueError:
                 blueprint_name = None
 
+            # Skip static rules
+            if name == 'static':
+                continue
+
             try:
                 self.register(rule, blueprint=blueprint_name)
             except TypeError:
@@ -150,6 +153,8 @@ class FlaskApiSpec:
         :param dict resource_class_kwargs: (optional) kwargs to be forwarded to
             the view class constructor.
         """
+        from flask_apispec import ResourceMeta
+
         if isinstance(target, types.FunctionType):
             paths = self.view_converter.convert(target, endpoint, blueprint)
         elif isinstance(target, ResourceMeta):

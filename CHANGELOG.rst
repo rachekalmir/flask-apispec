@@ -1,6 +1,37 @@
 Changelog
 ---------
 
+0.11.4 (2022-08-11)
+*******************
+
+Bug fixes:
+
+* Fix circular import (:issue:`239`).
+  Thanks :user:`synapticarbors` for reporting and thanks :user:`atugushev` for the PR.
+
+0.11.3 (2022-08-10)
+*******************
+
+Bug fixes:
+
+* Add static files to package (:issue:`235`).
+
+0.11.2 (2022-08-09)
+*******************
+
+Bug fixes:
+
+* Fix Flask 2.2 support (:issue:`237`). 
+  Thanks :user:`woutdenolf` for the catch and patch.
+
+0.11.1 (2022-03-29)
+*******************
+
+Bug fixes:
+
+* Fix Flask 2.x support (:issue:`229`). Thanks :user:`KyleJamesWalker` for the PR.
+
+
 0.11.0 (2020-10-25)
 *******************
 
